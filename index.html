@@ -530,6 +530,7 @@
       shapes: [],
       active: -1,
       mesh: null,
+      inactiveMesh: null,
       activeMesh: null,
       imports: [],
       nextMeshId: 1,
@@ -796,6 +797,7 @@
       try {
         const built = buildModel();
         state.mesh = built.mesh;
+        state.inactiveMesh = built.inactiveMesh;
         state.activeMesh = built.activeMesh;
         els.downloadBtn.disabled = !state.mesh;
         updateStats(state.mesh);
@@ -849,12 +851,14 @@
     function buildModel() {
       if (!state.shapes.length) {
         state.mesh = null;
+        state.inactiveMesh = null;
         state.activeMesh = null;
         updateStats(null);
         renderPreview();
-        return { mesh: null, activeMesh: null };
+        return { mesh: null, inactiveMesh: null, activeMesh: null };
       }
       const meshes = [];
+      const inactiveMeshes = [];
       let activeMesh = null;
       for (let i = 0; i < state.shapes.length; i++) {
         const shape = state.shapes[i];
@@ -862,10 +866,12 @@
         mesh = transformMesh(mesh, shape.position, shape.rotation);
         meshes.push(mesh);
         if (i === state.active) activeMesh = mesh;
+        else inactiveMeshes.push(mesh);
       }
       const mesh = centerModelMeshes(meshes);
       const active = activeMesh ? translateMesh(activeMesh, mesh.offset) : null;
-      return { mesh: mesh.mesh, activeMesh: active };
+      const inactive = inactiveMeshes.length ? translateMesh(combineMeshes(inactiveMeshes), mesh.offset) : null;
+      return { mesh: mesh.mesh, inactiveMesh: inactive, activeMesh: active };
     }
 
     function centerModelMeshes(meshes) {
@@ -1053,6 +1059,7 @@
       const item = selectedImport();
       if (!item) return;
       state.mesh = item.mesh;
+      state.inactiveMesh = null;
       state.activeMesh = item.mesh;
       els.targetX.value = fmt(item.size[0]);
       els.targetY.value = fmt(item.size[1]);
@@ -1401,17 +1408,15 @@
       state.gl = gl;
       if (!gl) return;
       const vs = `attribute vec3 p; attribute vec3 n; uniform mat4 m; varying vec3 vN; void main(){ vN=n; gl_Position=m*vec4(p,1.0); }`;
-      const fs = `precision mediump float; uniform vec3 color; uniform float alpha; varying vec3 vN; void main(){ vec3 l=normalize(vec3(0.4,0.8,0.7)); float d=max(0.32,dot(normalize(vN),l)); gl_FragColor=vec4(color*(0.36+d*0.72),alpha); }`;
+      const fs = `precision mediump float; uniform vec3 color; varying vec3 vN; void main(){ vec3 l=normalize(vec3(0.35,0.7,0.8)); float d=max(0.55,dot(normalize(vN),l)); gl_FragColor=vec4(color*(0.74+d*0.26),1.0); }`;
       const program = gl.createProgram();
       gl.attachShader(program, shader(gl, gl.VERTEX_SHADER, vs));
       gl.attachShader(program, shader(gl, gl.FRAGMENT_SHADER, fs));
       gl.linkProgram(program);
       state.glProgram = program;
-      state.glLoc = { p: gl.getAttribLocation(program, "p"), n: gl.getAttribLocation(program, "n"), m: gl.getUniformLocation(program, "m"), color: gl.getUniformLocation(program, "color"), alpha: gl.getUniformLocation(program, "alpha") };
+      state.glLoc = { p: gl.getAttribLocation(program, "p"), n: gl.getAttribLocation(program, "n"), m: gl.getUniformLocation(program, "m"), color: gl.getUniformLocation(program, "color") };
       state.buffers = { p: gl.createBuffer(), n: gl.createBuffer() };
       gl.enable(gl.DEPTH_TEST);
-      gl.enable(gl.BLEND);
-      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
     }
 
     function shader(gl, type, source) {
@@ -1461,11 +1466,12 @@
       if (!state.mesh) return;
       const size = Math.max(...dimensionsOf(state.mesh), 1);
       const matrix = multiply(perspective(45, canvas.width / canvas.height, 0.1, 100), modelView(size));
-      drawMesh(gl, state.mesh, matrix, [0.96, 0.74, 0.18], 1.0);
-      if (state.activeMesh) drawMesh(gl, state.activeMesh, matrix, [1.0, 0.96, 0.58], 1.0);
+      if (state.inactiveMesh) drawMesh(gl, state.inactiveMesh, matrix, [1.0, 0.78, 0.18]);
+      if (state.activeMesh) drawMesh(gl, state.activeMesh, matrix, [1.0, 0.98, 0.58]);
+      if (!state.inactiveMesh && !state.activeMesh) drawMesh(gl, state.mesh, matrix, [1.0, 0.78, 0.18]);
     }
 
-    function drawMesh(gl, mesh, matrix, color, alpha = 1) {
+    function drawMesh(gl, mesh, matrix, color) {
       const positions = [], normals = [];
       for (const t of mesh.triangles) {
         const n = normalOf(t);
@@ -1474,7 +1480,6 @@
       gl.useProgram(state.glProgram);
       gl.uniformMatrix4fv(state.glLoc.m, false, new Float32Array(matrix));
       gl.uniform3fv(state.glLoc.color, new Float32Array(color));
-      gl.uniform1f(state.glLoc.alpha, alpha);
       gl.bindBuffer(gl.ARRAY_BUFFER, state.buffers.p);
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
       gl.enableVertexAttribArray(state.glLoc.p);
