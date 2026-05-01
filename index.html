@@ -1461,8 +1461,8 @@
       if (!state.mesh) return;
       const size = Math.max(...dimensionsOf(state.mesh), 1);
       const matrix = multiply(perspective(45, canvas.width / canvas.height, 0.1, 100), modelView(size));
-      drawMesh(gl, state.mesh, matrix, [0.28, 0.23, 0.16], 0.78);
-      if (state.activeMesh) drawMesh(gl, state.activeMesh, matrix, [1.0, 0.92, 0.52], 1.0);
+      drawMesh(gl, state.mesh, matrix, [0.96, 0.74, 0.18], 1.0);
+      if (state.activeMesh) drawMesh(gl, state.activeMesh, matrix, [1.0, 0.96, 0.58], 1.0);
     }
 
     function drawMesh(gl, mesh, matrix, color, alpha = 1) {
