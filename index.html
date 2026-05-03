@@ -506,6 +506,9 @@
       box: { label: "Box / rectangular prism", category: "Rectangular", fields: [["width", 70], ["depth", 35], ["height", 12]] },
       cube: { label: "Cube", category: "Rectangular", fields: [["side", 35]] },
       wedge: { label: "Wedge / ramp", category: "Rectangular", fields: [["width", 50], ["depth", 35], ["height", 20]] },
+      rectangularFrame: { label: "Rectangular frame", category: "Rectangular", fields: [["outer width", 80], ["outer depth", 50], ["wall", 8], ["height", 8]] },
+      crossPlate: { label: "Cross plate", category: "Rectangular", fields: [["width", 80], ["depth", 80], ["arm width", 24], ["height", 8]] },
+      steppedBlock: { label: "Stepped block", category: "Rectangular", fields: [["base width", 80], ["base depth", 45], ["base height", 12], ["top width", 44], ["top depth", 30], ["top height", 16]] },
       cylinder: { label: "Cylinder / bore", category: "Round", fields: [["diameter", 40], ["height", 30], ["bore", 0]] },
       cone: { label: "Cone / frustum", category: "Round", fields: [["bottom diameter", 44], ["top diameter", 0], ["height", 35]] },
       sphere: { label: "Sphere", category: "Round", fields: [["radius", 18]] },
@@ -513,16 +516,42 @@
       ring: { label: "Ring / washer / tube", category: "Round", fields: [["outer diameter", 50], ["inner diameter", 18], ["height", 10]] },
       torus: { label: "Torus", category: "Round", fields: [["major radius", 28], ["tube radius", 6]] },
       capsule: { label: "Capsule", category: "Round", fields: [["radius", 12], ["straight height", 30]] },
+      ovalPlate: { label: "Oval plate", category: "Round", fields: [["width", 70], ["depth", 36], ["height", 8]] },
+      slotPlate: { label: "Slot / rounded rectangle", category: "Round", fields: [["length", 80], ["width", 28], ["height", 8]] },
+      halfCylinder: { label: "Half cylinder", category: "Round", fields: [["diameter", 42], ["length", 60]] },
+      quarterCylinder: { label: "Quarter cylinder", category: "Round", fields: [["diameter", 42], ["length", 60]] },
+      dome: { label: "Dome / hemisphere", category: "Round", fields: [["diameter", 44], ["height", 22]] },
       pyramid: { label: "Rectangular pyramid", category: "Pyramids", fields: [["width", 45], ["depth", 45], ["height", 30]] },
       tetrahedron: { label: "Tetrahedron", category: "Pyramids", fields: [["diameter", 45], ["height", 35]] },
       hexPyramid: { label: "Hexagonal pyramid", category: "Pyramids", fields: [["diameter", 55], ["height", 32]] },
+      conePyramid: { label: "Regular pyramid", category: "Pyramids", fields: [["sides", 5], ["diameter", 48], ["height", 32]] },
       prism: { label: "Regular prism", category: "Prisms", fields: [["sides", 6], ["diameter", 36], ["height", 24]] },
       triangularPrism: { label: "Triangular prism", category: "Prisms", fields: [["diameter", 40], ["height", 28]] },
       pentagonalPrism: { label: "Pentagonal prism", category: "Prisms", fields: [["diameter", 42], ["height", 28]] },
       hexagonalPrism: { label: "Hexagonal prism", category: "Prisms", fields: [["diameter", 42], ["height", 28]] },
+      octagonalPrism: { label: "Octagonal prism", category: "Prisms", fields: [["diameter", 44], ["height", 28]] },
+      starPrism: { label: "Star prism", category: "Prisms", fields: [["points", 5], ["outer diameter", 54], ["inner diameter", 24], ["height", 8]] },
       octahedron: { label: "Octahedron", category: "Platonic", fields: [["diameter", 45]] },
       icosahedron: { label: "Icosahedron", category: "Platonic", fields: [["diameter", 45]] },
       dodecahedron: { label: "Dodecahedron", category: "Platonic", fields: [["diameter", 45]] },
+      truncatedPyramid: { label: "Truncated pyramid", category: "Polyhedra", fields: [["bottom width", 58], ["bottom depth", 58], ["top width", 30], ["top depth", 30], ["height", 28]] },
+      diamondPrism: { label: "Diamond prism", category: "Polyhedra", fields: [["width", 50], ["depth", 50], ["height", 14]] },
+      lAngle: { label: "L angle beam", category: "Structural", fields: [["width", 60], ["depth", 60], ["thickness", 10], ["length", 80]] },
+      tBeam: { label: "T beam", category: "Structural", fields: [["flange width", 70], ["web thickness", 12], ["height", 54], ["length", 80]] },
+      iBeam: { label: "I beam", category: "Structural", fields: [["flange width", 72], ["flange thickness", 10], ["web thickness", 12], ["height", 58], ["length", 90]] },
+      cChannel: { label: "C channel", category: "Structural", fields: [["width", 58], ["height", 54], ["wall", 9], ["length", 90]] },
+      uChannel: { label: "U channel", category: "Structural", fields: [["width", 58], ["height", 38], ["wall", 8], ["length", 80]] },
+      gusset: { label: "Gusset bracket", category: "Structural", fields: [["width", 60], ["height", 42], ["thickness", 8]] },
+      gear: { label: "Gear blank", category: "Mechanical", fields: [["teeth", 16], ["outer diameter", 64], ["root diameter", 50], ["bore", 12], ["height", 10]] },
+      sprocket: { label: "Sprocket blank", category: "Mechanical", fields: [["teeth", 12], ["outer diameter", 64], ["root diameter", 46], ["bore", 14], ["height", 8]] },
+      hexNut: { label: "Hex nut", category: "Mechanical", fields: [["outer diameter", 48], ["bore", 20], ["height", 14]] },
+      boltHead: { label: "Bolt head", category: "Mechanical", fields: [["diameter", 42], ["height", 14]] },
+      flange: { label: "Pipe flange", category: "Mechanical", fields: [["outer diameter", 76], ["bore", 28], ["height", 10], ["hub diameter", 42], ["hub height", 18]] },
+      pulley: { label: "Pulley / wheel", category: "Mechanical", fields: [["diameter", 64], ["width", 18], ["bore", 12], ["rim height", 5]] },
+      pipeElbow: { label: "90 degree pipe elbow", category: "Mechanical", fields: [["bend radius", 36], ["tube radius", 8], ["angle", 90]] },
+      coil: { label: "Helical coil", category: "Mechanical", fields: [["radius", 28], ["wire radius", 4], ["pitch", 12], ["turns", 3]] },
+      honeycombPanel: { label: "Honeycomb panel", category: "Patterned", fields: [["columns", 4], ["rows", 3], ["cell diameter", 18], ["wall", 3], ["height", 6]] },
+      ribbedPlate: { label: "Ribbed plate", category: "Patterned", fields: [["width", 80], ["depth", 50], ["plate height", 5], ["rib height", 10], ["ribs", 3]] },
       imported: { label: "Imported STL mesh", category: "Imported", fields: [["mesh id", ""], ["width", 0], ["depth", 0], ["height", 0]] }
     };
 
@@ -888,6 +917,9 @@
         case "box": return makeBox(num(p.width), num(p.depth), num(p.height));
         case "cube": return makeBox(num(p.side), num(p.side), num(p.side));
         case "wedge": return makeWedge(num(p.width), num(p.depth), num(p.height));
+        case "rectangularFrame": return makeRectangularFrame(num(p["outer width"]), num(p["outer depth"]), num(p.wall), num(p.height));
+        case "crossPlate": return makeCrossPlate(num(p.width), num(p.depth), num(p["arm width"]), num(p.height));
+        case "steppedBlock": return makeSteppedBlock(p);
         case "cylinder": {
           const radius = num(p.diameter) / 2;
           const bore = num(p.bore) / 2;
@@ -899,16 +931,42 @@
         case "ring": return makeRing(num(p["outer diameter"]) / 2, num(p["inner diameter"]) / 2, num(p.height), seg);
         case "torus": return makeTorus(num(p["major radius"]), num(p["tube radius"]), seg, Math.max(8, Math.round(seg / 2)));
         case "capsule": return makeCapsule(num(p.radius), num(p["straight height"]), seg);
+        case "ovalPlate": return makeOvalPlate(num(p.width), num(p.depth), num(p.height), seg);
+        case "slotPlate": return makeSlotPlate(num(p.length), num(p.width), num(p.height), seg);
+        case "halfCylinder": return makeArcPrism(num(p.diameter) / 2, num(p.length), 180, seg);
+        case "quarterCylinder": return makeArcPrism(num(p.diameter) / 2, num(p.length), 90, seg);
+        case "dome": return makeDome(num(p.diameter) / 2, num(p.height), seg);
         case "pyramid": return makePyramid(num(p.width), num(p.depth), num(p.height));
         case "tetrahedron": return makeRegularPyramid(3, num(p.diameter), num(p.height));
         case "hexPyramid": return makeRegularPyramid(6, num(p.diameter), num(p.height));
+        case "conePyramid": return makeRegularPyramid(Math.max(3, Math.round(num(p.sides))), num(p.diameter), num(p.height));
         case "prism": return makeCylinder(num(p.diameter) / 2, num(p.height), Math.max(3, Math.round(num(p.sides))));
         case "triangularPrism": return makeCylinder(num(p.diameter) / 2, num(p.height), 3);
         case "pentagonalPrism": return makeCylinder(num(p.diameter) / 2, num(p.height), 5);
         case "hexagonalPrism": return makeCylinder(num(p.diameter) / 2, num(p.height), 6);
+        case "octagonalPrism": return makeCylinder(num(p.diameter) / 2, num(p.height), 8);
+        case "starPrism": return makeStarPrism(Math.max(3, Math.round(num(p.points))), num(p["outer diameter"]) / 2, num(p["inner diameter"]) / 2, num(p.height));
         case "octahedron": return makeOctahedron(num(p.diameter));
         case "icosahedron": return makeIcosahedron(num(p.diameter));
         case "dodecahedron": return makeDodecahedron(num(p.diameter));
+        case "truncatedPyramid": return makeTruncatedPyramid(num(p["bottom width"]), num(p["bottom depth"]), num(p["top width"]), num(p["top depth"]), num(p.height));
+        case "diamondPrism": return makeDiamondPrism(num(p.width), num(p.depth), num(p.height));
+        case "lAngle": return makeLAngle(num(p.width), num(p.depth), num(p.thickness), num(p.length));
+        case "tBeam": return makeTBeam(num(p["flange width"]), num(p["web thickness"]), num(p.height), num(p.length));
+        case "iBeam": return makeIBeam(num(p["flange width"]), num(p["flange thickness"]), num(p["web thickness"]), num(p.height), num(p.length));
+        case "cChannel": return makeCChannel(num(p.width), num(p.height), num(p.wall), num(p.length));
+        case "uChannel": return makeUChannel(num(p.width), num(p.height), num(p.wall), num(p.length));
+        case "gusset": return makeGusset(num(p.width), num(p.height), num(p.thickness));
+        case "gear": return makeGear(Math.max(6, Math.round(num(p.teeth))), num(p["outer diameter"]) / 2, num(p["root diameter"]) / 2, num(p.bore) / 2, num(p.height));
+        case "sprocket": return makeGear(Math.max(6, Math.round(num(p.teeth))), num(p["outer diameter"]) / 2, num(p["root diameter"]) / 2, num(p.bore) / 2, num(p.height), 0.42);
+        case "hexNut": return makeRing(num(p["outer diameter"]) / 2, num(p.bore) / 2, num(p.height), 6);
+        case "boltHead": return makeCylinder(num(p.diameter) / 2, num(p.height), 6);
+        case "flange": return makeFlange(num(p["outer diameter"]) / 2, num(p.bore) / 2, num(p.height), num(p["hub diameter"]) / 2, num(p["hub height"]), seg);
+        case "pulley": return makePulley(num(p.diameter) / 2, num(p.width), num(p.bore) / 2, num(p["rim height"]), seg);
+        case "pipeElbow": return makePipeElbow(num(p["bend radius"]), num(p["tube radius"]), num(p.angle), seg);
+        case "coil": return makeCoil(num(p.radius), num(p["wire radius"]), num(p.pitch), Math.max(1, num(p.turns)), seg);
+        case "honeycombPanel": return makeHoneycombPanel(Math.max(1, Math.round(num(p.columns))), Math.max(1, Math.round(num(p.rows))), num(p["cell diameter"]), num(p.wall), num(p.height));
+        case "ribbedPlate": return makeRibbedPlate(num(p.width), num(p.depth), num(p["plate height"]), num(p["rib height"]), Math.max(1, Math.round(num(p.ribs))));
         case "imported": return importedMeshForShape(shape);
         default: throw new Error("Unknown shape type.");
       }
@@ -951,21 +1009,50 @@
 
     function inferType(text) {
       if (text.includes("imported mesh")) return "imported";
+      if (text.includes("honeycomb")) return "honeycombPanel";
+      if (text.includes("ribbed")) return "ribbedPlate";
+      if (text.includes("pipe elbow") || text.includes("elbow")) return "pipeElbow";
+      if (text.includes("coil") || text.includes("spring") || text.includes("helix")) return "coil";
+      if (text.includes("flange")) return "flange";
+      if (text.includes("pulley") || text.includes("wheel")) return "pulley";
+      if (text.includes("sprocket")) return "sprocket";
+      if (text.includes("gear")) return "gear";
+      if (text.includes("hex nut") || text.includes("nut")) return "hexNut";
+      if (text.includes("bolt head")) return "boltHead";
+      if (text.includes("i beam") || text.includes("ibeam")) return "iBeam";
+      if (text.includes("t beam") || text.includes("tbeam")) return "tBeam";
+      if (text.includes("c channel")) return "cChannel";
+      if (text.includes("u channel")) return "uChannel";
+      if (text.includes("l angle") || text.includes("angle beam")) return "lAngle";
+      if (text.includes("gusset")) return "gusset";
+      if (text.includes("truncated pyramid")) return "truncatedPyramid";
+      if (text.includes("diamond prism")) return "diamondPrism";
       if (text.includes("dodecahedron")) return "dodecahedron";
       if (text.includes("icosahedron")) return "icosahedron";
       if (text.includes("octahedron")) return "octahedron";
       if (text.includes("tetrahedron")) return "tetrahedron";
       if (text.includes("torus") || text.includes("donut")) return "torus";
+      if (text.includes("slot") || text.includes("rounded rectangle")) return "slotPlate";
+      if (text.includes("oval plate")) return "ovalPlate";
+      if (text.includes("half cylinder")) return "halfCylinder";
+      if (text.includes("quarter cylinder")) return "quarterCylinder";
+      if (text.includes("dome") || text.includes("hemisphere")) return "dome";
       if (text.includes("ellipsoid") || text.includes("oval")) return "ellipsoid";
       if (text.includes("washer") || text.includes("ring") || text.includes("tube")) return "ring";
       if (text.includes("sphere") || text.includes("ball")) return "sphere";
       if (text.includes("cone") || text.includes("frustum")) return "cone";
       if (text.includes("hexagonal pyramid")) return "hexPyramid";
+      if (text.includes("regular pyramid")) return "conePyramid";
       if (text.includes("pyramid")) return "pyramid";
+      if (text.includes("rectangular frame") || text.includes("frame")) return "rectangularFrame";
+      if (text.includes("cross plate") || text.includes("cross")) return "crossPlate";
+      if (text.includes("stepped block") || text.includes("step block")) return "steppedBlock";
       if (text.includes("wedge") || text.includes("ramp")) return "wedge";
       if (text.includes("triangular prism")) return "triangularPrism";
       if (text.includes("pentagonal prism")) return "pentagonalPrism";
       if (text.includes("hexagonal prism")) return "hexagonalPrism";
+      if (text.includes("octagonal prism")) return "octagonalPrism";
+      if (text.includes("star prism") || text.includes("star")) return "starPrism";
       if (text.includes("prism")) return "prism";
       if (text.includes("capsule")) return "capsule";
       if (text.includes("cylinder") || text.includes("disc") || text.includes("disk")) return "cylinder";
@@ -1216,6 +1303,257 @@
       return (els.exportName.value || "text-cad-model").trim().replace(/[<>:"/\\|?*\x00-\x1f]/g, "-").replace(/\.+$/g, "") || "text-cad-model";
     }
 
+    function makeExtrudedProfile(points, height) {
+      const z0 = -height / 2, z1 = height / 2, triangles = [];
+      const bottom = points.map((p) => [p[0], p[1], z0]);
+      const top = points.map((p) => [p[0], p[1], z1]);
+      for (let i = 1; i < points.length - 1; i++) {
+        triangles.push(tri(bottom[0], bottom[i + 1], bottom[i]), tri(top[0], top[i], top[i + 1]));
+      }
+      for (let i = 0; i < points.length; i++) {
+        const j = (i + 1) % points.length;
+        triangles.push(tri(bottom[i], bottom[j], top[j]), tri(bottom[i], top[j], top[i]));
+      }
+      return { triangles };
+    }
+
+    function makeExtrudedAnnularProfile(outer, inner, height) {
+      const z0 = -height / 2, z1 = height / 2, triangles = [], count = Math.min(outer.length, inner.length);
+      const ob = outer.slice(0, count).map((p) => [p[0], p[1], z0]);
+      const ot = outer.slice(0, count).map((p) => [p[0], p[1], z1]);
+      const ib = inner.slice(0, count).map((p) => [p[0], p[1], z0]);
+      const it = inner.slice(0, count).map((p) => [p[0], p[1], z1]);
+      for (let i = 0; i < count; i++) {
+        const j = (i + 1) % count;
+        triangles.push(
+          tri(ob[i], ob[j], ot[j]), tri(ob[i], ot[j], ot[i]),
+          tri(ib[i], it[j], ib[j]), tri(ib[i], it[i], it[j]),
+          tri(ot[i], ot[j], it[j]), tri(ot[i], it[j], it[i]),
+          tri(ob[i], ib[j], ob[j]), tri(ob[i], ib[i], ib[j])
+        );
+      }
+      return { triangles };
+    }
+
+    function makeRectangularFrame(width, depth, wall, height) {
+      const w = Math.min(wall, width / 2), d = Math.min(wall, depth / 2);
+      return combineMeshes([
+        translateMesh(makeBox(width, d, height), [0, -depth / 2 + d / 2, 0]),
+        translateMesh(makeBox(width, d, height), [0, depth / 2 - d / 2, 0]),
+        translateMesh(makeBox(w, Math.max(0.1, depth - d * 2), height), [-width / 2 + w / 2, 0, 0]),
+        translateMesh(makeBox(w, Math.max(0.1, depth - d * 2), height), [width / 2 - w / 2, 0, 0])
+      ]);
+    }
+
+    function makeCrossPlate(width, depth, arm, height) {
+      return combineMeshes([makeBox(width, arm, height), makeBox(arm, depth, height)]);
+    }
+
+    function makeSteppedBlock(p) {
+      const baseHeight = num(p["base height"]), topHeight = num(p["top height"]);
+      return combineMeshes([
+        translateMesh(makeBox(num(p["base width"]), num(p["base depth"]), baseHeight), [0, 0, -topHeight / 2]),
+        translateMesh(makeBox(num(p["top width"]), num(p["top depth"]), topHeight), [0, 0, baseHeight / 2])
+      ]);
+    }
+
+    function makeOvalPlate(width, depth, height, seg) {
+      const points = Array.from({ length: seg }, (_, i) => {
+        const a = i / seg * Math.PI * 2;
+        return [Math.cos(a) * width / 2, Math.sin(a) * depth / 2];
+      });
+      return makeExtrudedProfile(points, height);
+    }
+
+    function makeSlotPlate(length, width, height, seg) {
+      const r = width / 2, straight = Math.max(0, length - width), points = [], half = straight / 2, halfSeg = Math.max(4, Math.round(seg / 2));
+      for (let i = 0; i <= halfSeg; i++) {
+        const a = -Math.PI / 2 + i / halfSeg * Math.PI;
+        points.push([half + Math.cos(a) * r, Math.sin(a) * r]);
+      }
+      for (let i = 0; i <= halfSeg; i++) {
+        const a = Math.PI / 2 + i / halfSeg * Math.PI;
+        points.push([-half + Math.cos(a) * r, Math.sin(a) * r]);
+      }
+      return makeExtrudedProfile(points, height);
+    }
+
+    function makeArcPrism(radius, length, degrees, seg) {
+      const steps = Math.max(3, Math.round(seg * degrees / 360));
+      const points = [[0, 0]];
+      for (let i = 0; i <= steps; i++) {
+        const a = i / steps * degrees * Math.PI / 180;
+        points.push([Math.cos(a) * radius, Math.sin(a) * radius]);
+      }
+      return rotateMesh(makeExtrudedProfile(points, length), [90, 0, 0]);
+    }
+
+    function makeStarPrism(points, outer, inner, height) {
+      const count = points * 2;
+      const profile = Array.from({ length: count }, (_, i) => {
+        const a = i / count * Math.PI * 2 - Math.PI / 2;
+        const r = i % 2 ? inner : outer;
+        return [Math.cos(a) * r, Math.sin(a) * r];
+      });
+      return makeExtrudedProfile(profile, height);
+    }
+
+    function makeDome(radius, height, seg) {
+      const rings = Math.max(4, Math.round(seg / 3)), triangles = [], base = [];
+      for (let i = 0; i < seg; i++) base.push(pt(i / seg * Math.PI * 2, radius, -height / 2));
+      const center = [0, 0, -height / 2];
+      for (let i = 0; i < seg; i++) triangles.push(tri(center, base[(i + 1) % seg], base[i]));
+      let previous = base;
+      for (let r = 1; r <= rings; r++) {
+        const t = r / rings;
+        const rr = radius * Math.cos(t * Math.PI / 2);
+        const z = -height / 2 + Math.sin(t * Math.PI / 2) * height;
+        if (r === rings) {
+          const apex = [0, 0, z];
+          for (let i = 0; i < seg; i++) triangles.push(tri(previous[i], previous[(i + 1) % seg], apex));
+        } else {
+          const ring = Array.from({ length: seg }, (_, i) => pt(i / seg * Math.PI * 2, rr, z));
+          for (let i = 0; i < seg; i++) {
+            const j = (i + 1) % seg;
+            triangles.push(tri(previous[i], previous[j], ring[j]), tri(previous[i], ring[j], ring[i]));
+          }
+          previous = ring;
+        }
+      }
+      return { triangles };
+    }
+
+    function makeTruncatedPyramid(bottomW, bottomD, topW, topD, height) {
+      const z0 = -height / 2, z1 = height / 2;
+      const b = [[-bottomW/2,-bottomD/2,z0],[bottomW/2,-bottomD/2,z0],[bottomW/2,bottomD/2,z0],[-bottomW/2,bottomD/2,z0]];
+      const t = [[-topW/2,-topD/2,z1],[topW/2,-topD/2,z1],[topW/2,topD/2,z1],[-topW/2,topD/2,z1]];
+      return { triangles: [tri(b[0],b[2],b[1]),tri(b[0],b[3],b[2]),tri(t[0],t[1],t[2]),tri(t[0],t[2],t[3]),tri(b[0],b[1],t[1]),tri(b[0],t[1],t[0]),tri(b[1],b[2],t[2]),tri(b[1],t[2],t[1]),tri(b[2],b[3],t[3]),tri(b[2],t[3],t[2]),tri(b[3],b[0],t[0]),tri(b[3],t[0],t[3])] };
+    }
+
+    function makeDiamondPrism(width, depth, height) {
+      return makeExtrudedProfile([[0,-depth/2],[width/2,0],[0,depth/2],[-width/2,0]], height);
+    }
+
+    function makeLAngle(width, depth, thickness, length) {
+      const w = Math.min(thickness, width), d = Math.min(thickness, depth);
+      return rotateMesh(combineMeshes([
+        translateMesh(makeBox(width, d, length), [0, -depth / 2 + d / 2, 0]),
+        translateMesh(makeBox(w, depth, length), [-width / 2 + w / 2, 0, 0])
+      ]), [90, 0, 0]);
+    }
+
+    function makeTBeam(flangeWidth, webThickness, height, length) {
+      const flange = Math.max(1, height * 0.22), web = Math.min(webThickness, flangeWidth);
+      return rotateMesh(combineMeshes([
+        translateMesh(makeBox(flangeWidth, flange, length), [0, height / 2 - flange / 2, 0]),
+        translateMesh(makeBox(web, height, length), [0, 0, 0])
+      ]), [90, 0, 0]);
+    }
+
+    function makeIBeam(flangeWidth, flangeThickness, webThickness, height, length) {
+      const webH = Math.max(0.1, height - flangeThickness * 2);
+      return rotateMesh(combineMeshes([
+        translateMesh(makeBox(flangeWidth, flangeThickness, length), [0, height / 2 - flangeThickness / 2, 0]),
+        translateMesh(makeBox(flangeWidth, flangeThickness, length), [0, -height / 2 + flangeThickness / 2, 0]),
+        makeBox(webThickness, webH, length)
+      ]), [90, 0, 0]);
+    }
+
+    function makeCChannel(width, height, wall, length) {
+      return rotateMesh(combineMeshes([
+        translateMesh(makeBox(wall, height, length), [-width / 2 + wall / 2, 0, 0]),
+        translateMesh(makeBox(width, wall, length), [0, height / 2 - wall / 2, 0]),
+        translateMesh(makeBox(width, wall, length), [0, -height / 2 + wall / 2, 0])
+      ]), [90, 0, 0]);
+    }
+
+    function makeUChannel(width, height, wall, length) {
+      return rotateMesh(combineMeshes([
+        translateMesh(makeBox(width, wall, length), [0, -height / 2 + wall / 2, 0]),
+        translateMesh(makeBox(wall, height, length), [-width / 2 + wall / 2, 0, 0]),
+        translateMesh(makeBox(wall, height, length), [width / 2 - wall / 2, 0, 0])
+      ]), [90, 0, 0]);
+    }
+
+    function makeGusset(width, height, thickness) {
+      return makeExtrudedProfile([[-width/2,-height/2],[width/2,-height/2],[-width/2,height/2]], thickness);
+    }
+
+    function makeGear(teeth, outer, root, bore, height, toothWidth = 0.55) {
+      const profile = [];
+      for (let i = 0; i < teeth; i++) {
+        const a = i / teeth * Math.PI * 2;
+        const step = Math.PI * 2 / teeth;
+        profile.push([Math.cos(a - step * toothWidth / 2) * root, Math.sin(a - step * toothWidth / 2) * root]);
+        profile.push([Math.cos(a - step * toothWidth / 2) * outer, Math.sin(a - step * toothWidth / 2) * outer]);
+        profile.push([Math.cos(a + step * toothWidth / 2) * outer, Math.sin(a + step * toothWidth / 2) * outer]);
+        profile.push([Math.cos(a + step * toothWidth / 2) * root, Math.sin(a + step * toothWidth / 2) * root]);
+      }
+      if (bore > 0) {
+        const inner = profile.map((_, i) => {
+          const a = i / profile.length * Math.PI * 2;
+          return [Math.cos(a) * bore, Math.sin(a) * bore];
+        });
+        return makeExtrudedAnnularProfile(profile, inner, height);
+      }
+      return makeExtrudedProfile(profile, height);
+    }
+
+    function makeFlange(outer, bore, height, hub, hubHeight, seg) {
+      return combineMeshes([
+        makeRing(outer, bore, height, seg),
+        translateMesh(makeRing(hub, bore, hubHeight, seg), [0, 0, (height + hubHeight) / 2])
+      ]);
+    }
+
+    function makePulley(radius, width, bore, rimHeight, seg) {
+      const core = bore > 0 ? makeRing(radius - rimHeight, bore, width, seg) : makeCylinder(radius - rimHeight, width, seg);
+      return combineMeshes([
+        core,
+        translateMesh(makeRing(radius, bore, rimHeight, seg), [0, 0, width / 2 - rimHeight / 2]),
+        translateMesh(makeRing(radius, bore, rimHeight, seg), [0, 0, -width / 2 + rimHeight / 2])
+      ]);
+    }
+
+    function makePipeElbow(bendRadius, tubeRadius, degrees, seg) {
+      const steps = Math.max(4, Math.round(seg * degrees / 180)), tubeSeg = Math.max(6, Math.round(seg / 2)), triangles = [];
+      for (let i = 0; i < steps; i++) for (let j = 0; j < tubeSeg; j++) {
+        const a0 = i / steps * degrees * Math.PI / 180, a1 = (i + 1) / steps * degrees * Math.PI / 180;
+        const b0 = j / tubeSeg * Math.PI * 2, b1 = (j + 1) / tubeSeg * Math.PI * 2;
+        const p00 = elbowPt(bendRadius, tubeRadius, a0, b0), p10 = elbowPt(bendRadius, tubeRadius, a1, b0), p11 = elbowPt(bendRadius, tubeRadius, a1, b1), p01 = elbowPt(bendRadius, tubeRadius, a0, b1);
+        triangles.push(tri(p00,p10,p11), tri(p00,p11,p01));
+      }
+      return centerMesh({ triangles });
+    }
+
+    function makeCoil(radius, wire, pitch, turns, seg) {
+      const steps = Math.max(12, Math.round(seg * turns)), tubeSeg = Math.max(5, Math.round(seg / 3)), triangles = [];
+      for (let i = 0; i < steps; i++) for (let j = 0; j < tubeSeg; j++) {
+        const a0 = i / steps * Math.PI * 2 * turns, a1 = (i + 1) / steps * Math.PI * 2 * turns;
+        const b0 = j / tubeSeg * Math.PI * 2, b1 = (j + 1) / tubeSeg * Math.PI * 2;
+        const p00 = coilPt(radius, wire, pitch, a0, b0), p10 = coilPt(radius, wire, pitch, a1, b0), p11 = coilPt(radius, wire, pitch, a1, b1), p01 = coilPt(radius, wire, pitch, a0, b1);
+        triangles.push(tri(p00,p10,p11), tri(p00,p11,p01));
+      }
+      return centerMesh({ triangles });
+    }
+
+    function makeHoneycombPanel(columns, rows, cell, wall, height) {
+      const meshes = [], outer = cell / 2, inner = Math.max(0.1, outer - wall), xStep = cell * 0.86, yStep = cell * 0.75;
+      for (let y = 0; y < rows; y++) for (let x = 0; x < columns; x++) {
+        meshes.push(translateMesh(makeRing(outer, inner, height, 6), [(x - (columns - 1) / 2) * xStep, (y - (rows - 1) / 2) * yStep + (x % 2 ? yStep / 2 : 0), 0]));
+      }
+      return combineMeshes(meshes);
+    }
+
+    function makeRibbedPlate(width, depth, plateHeight, ribHeight, ribs) {
+      const meshes = [translateMesh(makeBox(width, depth, plateHeight), [0, 0, -ribHeight / 2])];
+      for (let i = 0; i < ribs; i++) {
+        const x = ribs === 1 ? 0 : -width * 0.35 + i * (width * 0.7 / (ribs - 1));
+        meshes.push(translateMesh(makeBox(width * 0.08, depth, ribHeight), [x, 0, plateHeight / 2]));
+      }
+      return combineMeshes(meshes);
+    }
+
     function makeBox(width, depth, height) {
       const x = width / 2, y = depth / 2, z = height / 2;
       const p = [[-x,-y,-z],[x,-y,-z],[x,y,-z],[-x,y,-z],[-x,-y,z],[x,-y,z],[x,y,z],[-x,y,z]];
@@ -1361,6 +1699,12 @@
     function pt(a, r, z) { return [Math.cos(a) * r, Math.sin(a) * r, z]; }
     function spherePt(r, u, t) { const p = u * Math.PI * 2; return [r * Math.sin(t) * Math.cos(p), r * Math.sin(t) * Math.sin(p), r * Math.cos(t)]; }
     function torusPt(major, tube, a, b) { const r = major + tube * Math.cos(b); return [r * Math.cos(a), r * Math.sin(a), tube * Math.sin(b)]; }
+    function elbowPt(major, tube, a, b) { const r = major + tube * Math.cos(b); return [r * Math.cos(a), r * Math.sin(a), tube * Math.sin(b)]; }
+    function coilPt(radius, wire, pitch, a, b) {
+      const radial = [Math.cos(a), Math.sin(a), 0], vertical = [0, 0, 1];
+      const center = [Math.cos(a) * radius, Math.sin(a) * radius, pitch * a / (Math.PI * 2)];
+      return add(center, add(radial.map((x) => x * Math.cos(b) * wire), vertical.map((x) => x * Math.sin(b) * wire)));
+    }
     function tri(a, b, c) { return { a: [...a], b: [...b], c: [...c] }; }
 
     function combineMeshes(meshes) { return { triangles: meshes.flatMap((mesh) => mesh.triangles) }; }
